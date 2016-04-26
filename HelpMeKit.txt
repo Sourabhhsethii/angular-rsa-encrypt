@@ -1,0 +1,105 @@
+1.) OpenSSL RSA certification Generation
+===================================================================================
+a.) Generate Private Key CMD:-
+
+     openssl genrsa -out private.key 1024
+
+b.) Generate Public Key CMD:-
+
+     openssl rsa -pubout -in private.key -out public.key
+	 
+===================================================================================
+
+
+
+
+
+
+
+
+2.) Getting modulus and Exponent from Public Key
+===================================================================================
+a.) Please provide the Key to the jar provided.
+
+b.) RSA Public key and private Key with the name 
+             private.key
+             public.key
+
+ Put the (RSA-Encryption-Decryption-1.0.jar) jar in the same folder.
+
+
+C.)Below cmd Will provide the modulus and Exponent on the Basic of provided Key
+
+       java -jar RSA-Encryption-Decryption-1.0.jar
+===================================================================================
+
+
+
+
+
+
+
+3.) Encryption step On angular.js Platform (Front End -  Encryption)
+
+===================================================================================
+a.) copy paste the (support) Package provided in scripts folder of the Widget.
+
+b.) (support) Contains 3 file
+	i.)angular-rsa-encrypt.js
+	ii.)main.js
+	ii.)rsaKeySetup.js
+
+C.)set up the Public key , modulus and Exponent , Got from the Previous step Provide by Jar.
+	i.) Open the rsaKeySetup.js
+	ii.) Remove the Previous values and provide new values      to   below variables
+		.pubKey
+		.exp
+		.mod
+===================================================================================
+
+
+
+
+4.) Encryption Usage (Encrypting Values)
+===================================================================================
+1.) Load the angular-scripts using Require modulus as Global Variable.
+
+  E.G :-
+   var enciphering = require('./support/main');
+   var readKey = require('./support/rsaKeySetup');
+
+2.) Set the Values in Widget.
+  E.G:- 
+   var pubKey,exp,mod;
+   pubKey = readKey.getValues("publicKeyValue")
+            exp = readKey.getValues("exp");
+            mod = readKey.getValues("mod");
+
+3.) enciphering using module loaded above:-
+
+E.G:- 	               enciphering.setEncodeKey(pubKey,mod,exp);
+            console.log(enciphering.setEncrpt(TEXT_TO_BE_ENCODED_USING_RSA));
+
+4.) Check the Encoded Value in console of the Brower.
+
+5.) Pass the Value to the Backend and Encrypt at     backend using Jar Provided.
+===================================================================================
+
+
+
+
+
+
+
+
+5.)Decryption Using JAR (Backend -  Decryption):-
+===================================================================================
+a.) Java File Added.
+
+java -cp RSA-Encryption-Decryption-1.0.jar com.s8.encrypt.utility.ModulusExponentClient Encrypted String
+
+E.g:-
+
+Java -cp RSA-Encryption-Decryption-1.0.jar com.s8.encrypt.utility.RsaClient 54bd019205a28883b58c66f1368e50944b17a5a4cd1e0df825f9e6382a9c905fe22c313087da31686080b8a2e351457bafdf306cd513286cc7d36919915c1a66258b9a2e6f7146a8694bf319c0356469fa1f3e676becd8890ddbd45bc77f649f39c6b319556bda3c9060e6c298e3ebcb8cb19dcbf382add22c40b219f55aa888
+
+===================================================================================
